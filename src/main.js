@@ -12,60 +12,43 @@ document.querySelector('.searchbar__button').addEventListener('click', function(
 function onSearch(){
     let textString = document.querySelector('.searchbar input').value;
     if(textString.length > 0){
-        getMovies(textString);
+        getGames(textString);
     }
 }
 
 
 
-function getMovies(movieName){
+function getGames(gameName){
 
-    movieName = movieName.toLowerCase().split(' ').join('+');
+    gameName = gameName.toLowerCase().split(' ').join('%20');
 
-    fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${movieName}&r=xml`)
-        .then(response => response.text())
+    fetch(`https://api.rawg.io/api/games?page_size=7&search=${gameName}`)
+        .then(response => response.json())
+        .then(data => data.results)
         .then(data => {
-            let parser = new DOMParser();
-            let xml = parser.parseFromString(data, "application/xml");
-            console.log(xml);
-
-            let movies = xml.getElementsByTagName('movie');
-            let noResults = xml.getElementsByTagName('error');
-
-
-            if(noResults.length > 0 && noResults != null && noResults != undefined){
-                showErrorMessage();
-            }else{
-                // console.log(movies[0].attributes.title);
-                // createMovieList(movies);
-                console.log(movies);
-            }
+            createGamesList(data);
         });
 }
+
+
 
 
 function showErrorMessage(){
     element.innerHTML = `<div class="noResults">No Movies found</div>`;
 }
 
-function createMovieList(movies){
+function createGamesList(games){
 
-    for(let i = 0; i < movies.length; i++){
+    for(let i = 0; i < games.length; i++){
         element = document.querySelector('.searchResults');
-        let movie = movies[0].attributes;
-        element.innerHTML = `
+        let game = games[i];
+        element.innerHTML += `
             <li class="movie">
                     <div class="movie__poster">
-                        <img src="${movie.poster.value}" alt="">
+                        <img src="${game.background_image}" alt="">
                     </div>
-                    <div class="movie__info">
-                        <div class="movie__title">${movie.title.value}</div>
-                        <div class="movie__director"><span class="pre">Regisseur: </span><span class="after">${movie.director.value}</span></div>
-                        <ul class="movie__actors">
-                            ${movie.actors.value}
-                        </ul>
-                        <div class="movie__plot">${movie.plot.value}</div>
-                    </div>
+                    <div class="movie__title">${game.name}</div>
+                    <div class="movie__details">Details</div>
                 </li>
         `;
     }
