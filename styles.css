@@ -128,3 +128,66 @@ html{
     padding: 2rem;
     line-height: 1.6;
 }
+
+.suggestions{
+    margin-top: 5rem;
+}
+
+.suggestions__title{
+    padding: 2rem;
+    font-size: 2.2rem;
+}
+
+.slider{
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: palevioletred;
+}
+
+.arrow{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 4rem;
+    background-color: #222;
+    opacity: 0;
+}
+
+.arrow:hover{
+    opacity: 0.6;
+}
+
+.arrow__left{
+    left: 0;
+}
+
+.arrow__right{
+    right: 0;
+}
+
+.item{
+    width: 100%;
+    height: auto;
+}
+
+.item__image{
+    height: 30rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+
+.item__image img{
+    height: 100%;
+    width: auto;
+}
+
+.item__title{
+    padding: 2rem;
+    font-size: 1.8rem;
+}
