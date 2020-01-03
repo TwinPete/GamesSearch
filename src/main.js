@@ -26,6 +26,7 @@ function getGames(gameName){
         .then(response => response.json())
         .then(data => data.results)
         .then(data => {
+            console.log(data);
             createGamesList(data);
         });
 }
@@ -43,14 +44,16 @@ function createGamesList(games){
         element = document.querySelector('.searchResults');
         let game = games[i];
         element.innerHTML += `
-            <li class="movie">
-                    <div class="movie__poster">
+            <li class="game">
+                    <div class="game__screenshot">
                         <img src="${game.background_image}" alt="">
                     </div>
-                    <div class="movie__title">${game.name}</div>
-                    <div class="movie__details">Details</div>
+                    <div class="game__title">${game.name}</div>
+                    <a href="http://localhost:63342/gameSearch-web/detail.html?gameId='${game.id}'" class="game__details">Details</a>
                 </li>
         `;
     }
 }
+
+
 
