@@ -28,17 +28,23 @@ function getGames(gameName){
         .then(data => {
             console.log(data);
             createGamesList(data);
-        });
+        }).catch(() => {
+            showErrorMessage();
+    });
 }
 
 
 
 
 function showErrorMessage(){
-    element.innerHTML = `<div class="noResults">No Movies found</div>`;
+    element.innerHTML = `<div class="noResults">No Games found</div>`;
 }
 
 function createGamesList(games){
+    element = document.querySelector('.searchResults');
+    element.innerHTML = '';
+    element.innerHTML += `<div class="searchResults__label">${games.length} Results</div>`;
+
 
     for(let i = 0; i < games.length; i++){
         element = document.querySelector('.searchResults');

@@ -30,25 +30,24 @@ function createDetail(game){
 
 
 
-
+    element.innerHTML += `<div class="detail__label">Game Detail</div>`;
     element.innerHTML += `
             <li class="game">
                     <div class="game__screenshot">
-                        <img src="${game.background_image}" alt="">
+                        <img src="${game.background_image_additional}" alt="">
                     </div>
                     <div class="game__title">${game.name}</div>
-                   
-                    <div class="game__description">${game.description}</div>
-                    <div class="game__suggestions">
-                        <div class="suggestions__title">Similar Games</div>
-                        <div class="slider">
-                            <div class="slider__content">${createSuggestionsList(game.id)}</div>
-                            <div class="arrow arrow__left"></div>
-                            <div class="arrow arrow__right"></div>
-                        </div>
+                    <div class="game__rating"><strong>Rating: </strong>${game.rating}</div>
+                    <div class="game__platforms">
+                        <strong>Platforms: </strong>
+                        <ul>${makePlatformList(game.platforms)}</ul>
                     </div>
+                    <div class="game__description">${game.description}</div>
+                   
                 </li>
         `;
+
+    createSuggestionsList(game.id);
 
 
 }
@@ -75,21 +74,31 @@ function createSuggestionsList(gameId){
         console.log(data);
 
         data.forEach((game) => {
-            console.log(game.name);
             list += `
-                        <div class="item">
-                            <div class="item__image">
+                        <div class="game">
+                            <div class="game__screenshot">
                                 <img src="${game.background_image}" alt="">
                             </div>
-                            <div class="item__title">${game.name}</div>
+                            <div class="game__title">${game.name}</div>
                             <a href="http://localhost:63342/gameSearch-web/detail.html?gameId='${game.id}'" class="game__details">Details</a>
                         </div>
                             `;
         });
-        let e = document.querySelector('.slider__content');
-        e.innerHTML = list;
+        let e = document.querySelector('.suggestions');
+        e.innerHTML += `<div class="suggestions__label">Similar Games</div>`;
+        e.innerHTML += list;
     });
 
 
 
+}
+
+function makePlatformList(array){
+    let list = "";
+
+    array.forEach(element => {
+       list += `<li class="game__platform"> ${element.platform.name}</li>`
+    });
+    
+    return list;
 }

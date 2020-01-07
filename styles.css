@@ -64,7 +64,7 @@ html{
     color: #fff;
 }
 
-.searchResults{
+.searchResults, .gameDetail, .suggestions{
     margin-top: 8rem;
     width: 100%;
     display: flex;
@@ -87,6 +87,8 @@ html{
 
 .game .game__screenshot{
     width: 100%;
+    max-height: 35rem;
+    overflow: hidden;
 }
 
 .game .game__screenshot img{
@@ -129,8 +131,25 @@ html{
     line-height: 1.6;
 }
 
-.suggestions{
-    margin-top: 5rem;
+.game__rating{
+    padding: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.game__platforms{
+    padding: 2rem;
+    display: flex;
+    font-size: 1.8rem;
+}
+
+.game__platforms ul{
+    display: flex;
+    list-style: circle;
+}
+
+.game__platform{
+    margin-left: 3rem;
 }
 
 .suggestions__title{
@@ -138,56 +157,17 @@ html{
     font-size: 2.2rem;
 }
 
-.slider{
-    position: relative;
+.searchResults__label,
+.detail__label,
+.suggestions__label{
+    padding: 3rem 1rem;
+    margin-bottom: 4rem;
+    font-size: 3.5rem;
+    color: #2247a3;
+    font-family: "Helvetica Neue";
+    text-align: center;
     width: 100%;
-    height: auto;
-    background-color: palevioletred;
-}
-
-.arrow{
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 4rem;
-    background-color: #222;
-    opacity: 0;
-}
-
-.arrow:hover{
-    opacity: 0.6;
-}
-
-.arrow__left{
-    left: 0;
-}
-
-.arrow__right{
-    right: 0;
-}
-
-.item{
-    width: 100%;
-    height: auto;
-}
-
-.item__image{
-    height: 30rem;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
+    max-width: 70rem;
 }
 
 
-.item__image img{
-    height: 100%;
-    width: auto;
-}
-
-.item__title{
-    padding: 2rem;
-    font-size: 1.8rem;
-}
